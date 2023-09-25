@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapplication-deployment
+  labels:
+    app: webapplication
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapplication
+  template:
+    metadata:
+      labels:
+        app: webapplication
+    spec:
+      containers:
+        - name: backend
+          image: kubernetes-learning/backend:latest
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 8080
