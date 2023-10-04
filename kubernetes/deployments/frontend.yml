@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapplication
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: webapplication
+        tier: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: kubernetes-learning/frontend:latest
+          imagePullPolicy: Never
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/usr/sbin/nginx", "-s", "quit"]
