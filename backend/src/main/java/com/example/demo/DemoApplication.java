@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DemoApplication {
 
 	public static void main(String[] args) throws InterruptedException {
-		Thread.sleep((long)(Math.random() * 60000)); // Waits up to 60 seconds
+		// Thread.sleep((long)(Math.random() * 60000)); // Waits up to 60 seconds
 		SpringApplication.run(DemoApplication.class, args);
 	}
 

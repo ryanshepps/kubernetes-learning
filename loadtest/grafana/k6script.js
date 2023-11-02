@@ -10,6 +10,9 @@ export const options = {
                     type: 'chromium',
                 },
             },
+            vus: 10,
+            iterations: 5000,
+            maxDuration: '240s'
         },
     },
 }
@@ -18,8 +21,7 @@ export default async function () {
     const page = browser.newPage();
 
     try {
-        await page.goto('http://FRONTEND_IP');
-        sleep(1);
+        await page.goto('http://10.101.153.182');
     } finally {
         page.close();
     }
