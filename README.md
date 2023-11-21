@@ -28,6 +28,11 @@ cd backend && ./scripts/buildDocker.sh && cd .. && \
 cd frontend && ./scripts/buildDocker.sh && cd .. &&
 ```
 
+Create namespaces to appropriately separate resources
+```
+kubectl apply -f kubernetes/namespaces
+```
+
 Deploy pods in Minikube that have containers that use the images we just built.
 
 ```
