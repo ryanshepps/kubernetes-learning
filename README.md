@@ -7,15 +7,13 @@
 
 ## Running
 
-(I hope to find a way to make this simpler.)
-
 Start Minikube
 
 ```
 minikube start
 ```
 
-Connect local docker to minikube docker
+Connect current session to minikube registry
 
 ```
 eval $(minikube docker-env)
@@ -28,39 +26,25 @@ cd backend && ./scripts/buildDocker.sh && cd .. \
 cd frontend && ./scripts/buildDocker.sh && cd .. 
 ```
 
-Create namespaces to appropriately separate resources
-```
-kubectl apply -f kubernetes/app \
-kubectl apply -f kubernetes/metrics
-```
-
-Deploy pods in Minikube that have containers that use the images we just built.
+Create all namespaces so that resources can be added to them
 
 ```
-kubectl apply -f kubernetes/app/deployments \
-kubectl apply -f kubernetes/metrics/deployments
+kubectl apply -f kubernetes/app -f kubernetes/metrics
 ```
 
-Create services for each deployment so that traffic can be routed to the pods we just created.
+Create all resources
 
 ```
-kubectl apply -f kubernetes/app/services \ 
-kubectl apply -f kubernetes/metrics/services
+kubectl apply -R -f kubernetes/
 ```
 
-Add externalized configurations as config maps so that you can change the config without having to redeploy.
+Open frontend service to external traffic
 
 ```
-kubectl apply -f kubernetes/metrics/configmap
-```
-
-Add the appropriate authorization for Prometheus to grab metrics.
-```
-kubectl apply -f kubernetes/metrics/clusteroles
+minikube tunnel
 ```
 
 To access the frontend, run the following command and access the external IP via a web browser.
-
 ```
 minikube service list
 ```
